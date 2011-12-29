@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Porks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href='styles/stylesheets/print.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
+
+    <style media='screen, projection'>
+
+      body {
+        font-size: 1.1em
+      }
+
+      .print {
+        width: 800px;
+        margin: 2em auto;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <div class='print'>
+
+      <h1>#<span data-bind='text: p.invoice.d.identifier'></span></h1>
+
+      <div class='info'>
+
+        <strong>Date:</strong>
+        <span data-bind='text: p.invoice.d.date'></span><br />
+
+        <strong>Expiration date:</strong>
+        <span data-bind='text: p.invoice.expirationDate'></span><br />
+
+        <!-- ko if: p.invoice.d.tax -->
+        <strong>Tax:</strong>
+        <span data-bind='text: p.invoice.d.tax'></span>%
+        <!-- /ko -->
+
+      </div>
+
+      <div class='clients'>
+
+        <div class='you'>
+
+          <h2 data-bind='text: p.itsme.d.name'></h2>
+          <div data-bind='text: p.itsme.d.street_number'></div>
+          <div>
+           <span data-bind='text: p.itsme.d.zipcode'></span>
+           <span data-bind='text: p.itsme.d.place'></span>
+          </div>
+          <div data-bind='text: p.itsme.d.registration_number'></div>
+          <div data-bind='text: p.itsme.d.bank'></div>
+          <div data-bind='text: p.itsme.d.email'></div>
+
+        </div>
+
+        <div class='client'>
+
+          <h2 data-bind='text: p.you.d.name'></h2>
+          <div data-bind='text: p.you.d.street_number'></div>
+          <div>
+           <span data-bind='text: p.you.d.zipcode'></span>
+           <span data-bind='text: p.you.d.place'></span>
+          </div>
+          <div data-bind='text: p.you.d.registration_number'></div>
+          <div data-bind='text: p.you.d.bank'></div>
+          <div data-bind='text: p.you.d.email'></div>
+
+        </div>
+
+      </div>
+
+      <table class='products'>
+
+        <tr>
+          <th class='description'>Description</th>
+          <th class='price'>Price(<span data-bind='text: p.settings.d.currency'>euro</span>)</th>
+        </tr>
+
+        <!-- ko foreach: p.invoice.d.parts -->
+
+        <tr>
+          <td class='description' data-bind='text: $data.d.description'></td>
+          <td class='price' data-bind='text: $data.d.cost'></td>
+        </tr>
+
+        <!-- /ko -->
+
+
+      </table>
+
+      <!-- ko if: p.invoice.d.tax -->
+      <div class='sub-totals'>
+        <strong>Subtotal:</strong> 
+        <span data-bind='text: p.invoice.subTotal'></span><br />
+
+        <strong>Tax:</strong> 
+        <span data-bind='text: p.invoice.tax'></span> 
+      </div>
+      <!-- /ko -->
+
+      <div class='total'>
+        <strong>Total:</strong> 
+        <span class='total-currency'>
+          <span data-bind='text: p.invoice.total'></span>
+          <span data-bind='text: p.settings.d.currency'></span>
+        </span>
+      </div>
+
+      <div class='disclaimer' data-bind='text: p.invoice.d.disclaimer'></div>
+
+    </div>
+
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js'></script>
+    <script type='text/javascript' src='modules.js'></script>
+    <script type='text/javascript'>
+
+      window.onload = function(){
+        var Porks = require('app/app'); 
+        var porks = new Porks;
+        var vm = porks.getPrintViewmodel();
+        ko.applyBindings(vm);
+      };
+
+    </script>
+
+  </body>
+
+</html>

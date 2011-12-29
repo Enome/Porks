@@ -1,0 +1,337 @@
+/*
+  Welcome to Compass.
+  In this file you should write your main styles. (or centralize your imports)
+  Import this file using the following HTML or equivalent:
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+@import compass/utilities/general/clearfix
+@import "compass/reset/utilities"
+@import "compass/css3/border-radius"
+@import "compass/css3/text-shadow"
+@import url(http://fonts.googleapis.com/css?family=Lobster+Two:700)
+@import "../libs/normalize.scss"
+
+
+/*  Variables
+  -----------------------/
+
+$first: black
+$second: #CCCCCC
+$third: #F3F3F3
+$fourth: #FFF8C6
+
+
+/*  Tags
+  -----------------------/
+
+html
+  overflow: hidden
+
+body
+  font-family: 'Helvetica Neue', Arial, Sans-Serif
+  line-height: 1.3em
+  margin: 0
+  overflow: hidden
+
+a
+  color: $second
+  cursor: pointer
+
+  &:hover
+    color: $first
+
+label
+  display: block
+  margin-bottom: 1em
+
+  &.invalid
+    input[type=text], textarea
+      background-color: $fourth
+
+  span
+    display: block
+    text-transform: uppercase
+    font-size: .9em
+    margin-bottom: 4px
+
+  &.inline
+    margin-bottom: .10em
+    
+    span
+      display: inline-block
+      margin-right: 10px
+
+    input[type=text]
+      border: 0px none
+      padding: 0
+
+      &:hover
+        background: $fourth
+
+  ul
+    color: red
+
+input[type=text], textarea
+  border: 1px dotted $second
+  padding: 3px 5px
+  font-size: 1.2em
+
+textarea
+  height: 3em
+
+h1
+  font-size: 34px
+  margin-left: 14px
+  margin-top: 14px
+  color: #d1d1d1
+  font-family: 'Lobster Two', cursive
+  +text-shadow( 0px -1px -1px #777777 )
+
+h2
+  text-transform: uppercase
+  padding-bottom: 10px
+  font-size: 36px
+  line-height: 1.5em
+
+button, .btn
+  +border-radius(2px)
+  background: white
+  border: 1px solid $second
+  padding: 7px
+  text-decoration: none
+  color: black
+
+  &:hover
+    background: $third
+
+  &:visited
+    color: black
+
+strong
+  font-weight: bold
+
+
+/*  general styles
+  -----------------------/
+
+.label
+  background: $third
+  color: gray
+
+
+/*  general layout
+  -----------------------/
+
+.row, .col
+  overflow: hidden
+  position: absolute
+
+.row 
+  left: 0
+  right: 0
+
+.col
+  top: 0
+  bottom: 0
+
+.scroll-x 
+  overflow-x: auto
+
+.scroll-y 
+  overflow-y: auto
+
+@import "compass/css3/gradient"
+
+.header.row
+  border-bottom: 1px solid $second
+  background: #ebebeb
+  height: 49px
+  top: 0
+
+.body.row
+  top: 50px
+  bottom: 50px
+
+.footer.row 
+  border-top: 1px solid $second
+  background: #ebebeb
+  height: 50px
+  bottom: 0
+
+.left.col
+  width: 299px
+  border-right: 1px solid $second
+
+.right.col
+  left: 300px
+  right: 0
+
+
+/*  Settings
+  -----------------------/
+.settings
+  position: absolute
+  right: 7px
+  top: 7px
+
+
+/*  Sidebar
+  -----------------------/
+
+.command-line
+
+  input[type=text]
+    width: 270px
+    margin-top: 8px
+    margin-left: 8px
+
+.navigation ul
+  +reset-list-style
+  +reset-box-model
+
+  li
+    background: #F9F9F9
+    padding-left: 20px
+    border-bottom: 1px solid $second
+    cursor: pointer
+
+    &:hover, &.select
+      background: $third !important
+
+    &.client
+      font-size: 16px
+      line-height: 60px
+      font-weight: bold
+
+    &.title
+      font-size: 14px
+      line-height: 40px
+      background: #FAFAFA
+
+    &.invoice, &.more
+      background: white
+      font-size: 12px
+      line-height: 30px
+
+
+/*  Content
+  -----------------------/
+
+#Content
+  margin: 0 auto
+  padding: 20px
+  width: 500px
+
+  p.actions
+    text-align: right
+
+  .form
+    input[type=text], textarea
+      width: 490px
+
+    .action
+      text-transform: uppercase
+      text-align: center
+
+
+    .sub
+      padding: 20px
+      border: 1px dotted $second
+
+      input[type=text], textarea
+        width: 450px
+
+
+  #Invoice
+    .general
+      margin-bottom: 1em
+      padding-bottom: 2em
+      border-bottom: 1px dashed $second
+
+    .client-info
+
+      +clearfix
+      margin-bottom: 3em
+      padding-bottom: 2em
+      border-bottom: 1px dashed $second
+
+      h3
+        text-transform: uppercase
+
+      .left
+        float: left
+
+      .right
+        text-align: right
+        float: right
+
+      .info
+        +reset-list-style
+        +reset-box-model
+
+
+    .sub-parts
+      margin-bottom: 4em
+      width: 100%
+
+      textarea
+        width: 99%
+
+      textarea, input
+        border: 0 none
+
+        &:hover, &:focus
+          background: $fourth
+
+      th, td
+        border-bottom: 1px dashed $second
+
+      th
+        text-align: left
+        text-transform: uppercase
+        padding-bottom: 5px
+        font-size: .7em
+
+      td
+        border: 1px dashed $second
+
+      .cost
+        text-align: right
+        width: 100px
+
+        input[type=text]
+          height: 100%
+          text-align: right
+          width: 100px
+
+      .action
+        text-align: center
+        width: 65px
+
+    .totals
+      width: 100%
+      line-height: 1.5em
+      margin-bottom: 4em
+      text-align: right
+
+      th
+        text-transform: uppercase
+
+      td
+        &.cost
+          width: 140px
+
+      tfoot
+        td
+          padding-top: 2em
+          font-size: 2em
+
+    #Disclaimer
+      border: 1px dashed $second
+      width: 580px 
+      margin-bottom: 1em
+      height: 4em
+      padding: 10px 
+
+    .actions
+      margin-bottom: 2em

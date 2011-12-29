@@ -1,0 +1,127 @@
+
+@import "../libs/normalize.scss"
+@import "compass/utilities/general/clearfix" 
+@import "compass/reset"
+
+
+@mixin border-padding
+
+  border-bottom: 1px dashed gray
+  padding-bottom: 20px
+  margin-bottom: 20px
+
+
+body
+
+  font-family: 'courier new', courier, monospace
+  line-height: 1.5em
+  font-size: 12px
+  padding: 0 25px
+
+
+h1
+
+  +border-padding
+  font-size: 3em
+  line-height: 1em
+  font-weight: bold
+
+
+h2
+
+  +reset-box-model
+  font-weight: bold
+  font-size: 1.5em
+  text-transform: uppercase
+
+
+strong
+
+  font-weight: bold
+
+
+table
+
+  tr
+
+    th
+
+      font-weight: bold
+      text-align: left  
+      text-transform: uppercase
+
+
+.info
+
+  +border-padding
+
+  strong
+
+    text-transform: uppercase
+
+
+.clients
+
+  +clearfix
+  +border-padding
+
+  .you
+
+    float: left
+    width: 50%
+
+  .client
+
+    float: left
+    width: 50%
+    text-align: right
+
+
+table.products
+
+  margin-bottom: 45px
+  width: 100%
+  
+  tr
+
+    td, th
+
+      border-bottom: 1px dashed gray
+      padding-bottom: 10px
+      padding-top: 10px
+
+      &.price
+
+        text-align: right
+        width: 165px
+
+
+.sub-totals
+
+  text-align: right
+  font-size: 1.25em
+  margin-bottom: 45px
+
+  strong
+
+    text-transform: uppercase
+
+
+.total
+
+  text-align: right
+  font-size: 2.0em
+  margin-bottom: 45px
+
+  .total-currency
+
+    display: inline-block
+    border: 1px dashed black
+    padding: 15px
+
+
+.disclaimer
+
+  font-size: .8em
+  border: 1px dashed gray
+  padding: 10px

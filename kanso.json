@@ -1,0 +1,17 @@
+{
+    "name": "Porks",
+    "version": "0.0.1",
+    "description": "Invoice application",
+    "attachments": ["index.html", "print.html", "styles/stylesheets/"],
+    "modules" : ["app"],
+    "coffee-script" : { "modules" : ["app"] },
+    "load" : "app/properties",
+    "dependencies": {
+        "attachments": null,
+        "modules": null,
+        "coffee-script-precompiler": null,
+        "events" : null,
+        "properties" : null,
+        "session" : null
+    }
+}

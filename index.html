@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link href='styles/stylesheets/screen.css' media='screen, projection' rel='stylesheet' type='text/css' />
+
+    <title>Porks</title>
+
+  </head>
+
+  <body>
+
+    <div class='left col'>
+
+      <div class='header row command-line'>
+        <input type='text' placeholder='New client name' data-bind='value: cl.command'/>
+      </div>
+
+      <div class='body row navigation scroll-y'>
+
+        <ul>
+
+          <!-- ko foreach: cs.clients -->
+
+            <li class='client' data-bind='text: fullname, click: select, css: { select : selected }'></li>
+
+            <!-- ko if: selected -->
+
+              <li class='title' data-bind='click: createInvoice'>
+                <span class='action'>+</span>
+                Invoices
+              </li>
+               
+              <!-- ko foreach: invoices -->
+
+              <li class='invoice' data-bind='click: select, css: { select : selected }'>
+                <span data-bind='text: fullname'></span> -
+                <span data-bind='text: status' class='label'></span>
+              </li>
+
+              <!-- /ko -->
+
+            <!-- /ko -->
+
+          <!-- /ko -->
+
+        </ul>
+
+      </div>
+
+      <div class='footer row'>
+        <h1>Porks *</h1>
+      </div>
+
+    </div>
+
+    <div class='right col'>
+
+      <div class='header row'>
+        <button class='settings' data-bind='click: se.select'>Settings</button>
+      </div>
+
+      <div class='body row scroll-y content'>
+
+        <div id='Content'>
+
+          <!-- ko with: s -->
+
+            <!-- ko with: settings -->
+
+              <div class='form'>
+                <h2>Settings</h2>
+
+                <h3>Clients</h3>
+                <!-- ko template: validationItem(d.clientCounter, "Counter") --><!-- /ko -->
+
+                <h3>Invoices</h3>
+
+                <label>
+                  <span>Currency</span>
+                  <input type='text' data-bind='value: d.currency' />
+                </label>
+
+                <!-- ko template: validationItem(d.invoiceCounter, "Counter") --><!-- /ko -->
+                <!-- ko template: validationItem(d.expiration, "Expiration") --><!-- /ko -->
+                <!-- ko template: validationItem(d.tax, "Tax") --><!-- /ko -->
+
+                <label>
+                  <span>Disclaimer</span>
+                  <textarea data-bind='value: d.disclaimer'></textarea> 
+                </label>
+              </div>
+
+            <!-- /ko -->
+
+            <!-- ko with: client -->
+
+              <div class='form'>
+                <h2 data-bind='text: fullname'></h2> 
+            
+                <!-- ko template: validationItem(d.identifier, "Identifier") --><!-- /ko -->
+                <!-- ko template: validationItem(d.name, "Name") --><!-- /ko -->
+                <!-- ko template: validationItem(d.email, "Email") --><!-- /ko -->
+
+                <!-- ko template: item(d.registration_number, "Registration number") --><!-- /ko -->
+                <!-- ko template: item(d.bank, "Bank") --><!-- /ko -->
+                <!-- ko template: item(d.street_number, "Street + number") --><!-- /ko -->
+                <!-- ko template: item(d.zipcode, "Zipcode") --><!-- /ko -->
+                <!-- ko template: item(d.place, "Place") --><!-- /ko -->
+
+                <button data-bind='click: remove'>remove</button>
+              </div>
+
+            <!-- /ko -->
+
+            <!-- ko with: invoice -->
+
+            <div class='form'>
+
+                <h2 data-bind='text: fullname'></h2> 
+
+                <!-- ko template: validationItem(d.identifier, "Identifier") -->   <!-- /ko -->
+                <!-- ko template: validationItem(d.date, "Date") -->               <!-- /ko -->
+                <!-- ko template: validationItem(d.closed_date, "Closed Date") --> <!-- /ko -->
+                <!-- ko template: validationItem(d.expiration, "Expiration") -->   <!-- /ko -->
+                <!-- ko template: validationItem(d.tax, "Tax (%)") -->             <!-- /ko -->
+
+                <!-- ko foreach: d.parts -->
+
+                  <p class='sub'>
+                    <!-- ko template: validationItem(d.description, "Description") --><!-- /ko -->
+                    <!-- ko template: validationItem(d.cost, "Cost") --><!-- /ko -->
+
+                    <button data-bind='click: function(){ $parent.removePart($data) }'>Remove</button>
+                  </p>
+
+                <!-- /ko -->
+
+                <p class='action'>
+                  <a data-bind='click: createPart'>Add Product/Service/...</a>
+                </p>
+                
+                <label>
+                  <span>Disclaimer</span>
+                  <textarea data-bind='value: d.disclaimer'></textarea>
+                </label>
+
+                <a class='btn' target='_blank' data-bind='attr: { href: printLink }'>print</a>
+                <button data-bind='click: remove'>remove</button>
+
+              </div>
+
+            <!-- /ko -->
+
+          <!-- /ko -->
+
+        </div>
+
+      </div>
+
+      <div class='footer row'></div>
+
+    </div>
+
+
+    <script type='text/html' id='ValidationItem'>
+      <label data-bind='validateCss: $data.field'>
+        <span data-bind='text: name'></span> 
+        <input type='text' data-bind='value: $data.field' />
+        <ul data-bind='foreach: $data.field.errors'>
+          <li data-bind='text: $data'></li>
+        </ul>
+      </label>
+    </script>
+
+    <script type='text/html' id='Item'>
+      <label>
+        <span data-bind='text: $data.name'></span>
+        <input type='text' data-bind='value: $data.field'  />
+      </label>
+    </script>
+
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js'></script>
+    <script type='text/javascript' src='modules.js'></script>
+
+    <script type='text/javascript'>
+
+      window.onload = function(){
+        var Porks = require('app/app'); 
+        var porks = new Porks;
+        var vm = porks.getViewmodel();
+        vm.se.select();
+        ko.applyBindings(vm);
+      };
+
+    </script>
+
+  </body>
+
+</html>
